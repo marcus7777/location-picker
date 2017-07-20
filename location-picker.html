@@ -1,0 +1,20 @@
+<link rel="import" href="../google-map/google-map.html">
+<link rel="import" href="../google-map/google-map-marker.html">
+<link rel="import" href="../polymer/polymer.html">
+<!--
+  `<location-picker></location-picker>` Pick a location from a map
+  @demo demo.html
+-->
+<dom-module id="location-picker">
+  <template>
+    <style>:host {display:block;height:200px} </style>
+    <google-map api-key="AIzaSyBICzX2fN6my70KY2YaymzqvfZs_VViaMQ" style="height:100%" map="{{map}}"  latitude="{{latitude}}" longitude="{{longitude}}">
+      <google-map-marker latitude="[[latitude]]" longitude="[[longitude]]"></google-map-marker>
+    </google-map>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: "location-picker",
+  })
+</script>
