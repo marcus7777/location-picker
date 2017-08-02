@@ -8,7 +8,7 @@
 <dom-module id="location-picker">
   <template>
     <style>:host {display:block;height:200px} </style>
-    <google-map api-key="AIzaSyBICzX2fN6my70KY2YaymzqvfZs_VViaMQ" style="height:200px" latitude="{{latitude}}" longitude="{{longitude}}">
+    <google-map map="{{map}}" api-key="AIzaSyBICzX2fN6my70KY2YaymzqvfZs_VViaMQ" style="height:200px"  latitude="{{latitude}}" longitude="{{longitude}}">
       <google-map-marker latitude="[[latitude]]" longitude="[[longitude]]"></google-map-marker>
     </google-map>
   </template>
@@ -23,6 +23,16 @@
       longitude:{
         notify:true,
       },
+      mapZoom:{
+        computer:"getZoom(map,latitude,longitude)",
+        notify:true,
+      },
+    },
+    getZoom: function(map) {
+      console.log(map)
+      if (map.zoom) {
+        return map.zoom
+      }
     },
   })
 </script>
