@@ -30,7 +30,7 @@
     },
     getZoom: function(map) {
       console.log(map)
-      if (map.zoom) {
+      if (map && map != null && map.zoom) {
         return map.zoom
       }
     },
