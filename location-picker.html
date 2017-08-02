@@ -24,14 +24,14 @@
         notify:true,
       },
       mapZoom:{
-        computed: "getZoom(map,latitude,longitude)",
+        computed: "getZoom(map.zoom,latitude,longitude)",
         notify:true,
       },
     },
-    getZoom: function(map) {
-      console.log(map)
-      if (map && map != null && map.zoom) {
-        return map.zoom
+    getZoom: function(zoom) {
+      console.log(zoom)
+      if (zoom) {
+        return zoom
       }
     },
   })
