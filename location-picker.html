@@ -37,28 +37,15 @@
       }
     },
     getGeoHash: function(mapZoom,latitude,longitude) {
-      var saveSize = 9
-      if (mapZoom < 16) {
-        saveSize = 8
-      }
-      if (mapZoom < 15) {
-        saveSize = 7
-      }
-      if (mapZoom < 13) {
-        saveSize = 6
-      }
-      if (mapZoom < 11) {
-        saveSize = 5
-      }
-      if (mapZoom < 7) {
-        saveSize = 4
-      }
-      if (mapZoom < 4) {
-        saveSize = 3
-      }
-      if (mapZoom < 3) {
-        saveSize = 2
-      }
+      var                saveSize = 9
+      if (mapZoom < 16) {saveSize = 8}
+      if (mapZoom < 15) {saveSize = 7}
+      if (mapZoom < 13) {saveSize = 6}
+      if (mapZoom < 11) {saveSize = 5}
+      if (mapZoom <  7) {saveSize = 4}
+      if (mapZoom <  3) {saveSize = 3}
+      if (mapZoom <  2) {saveSize = 2}
+      
       var geoHash = encodeGeoHash(latitude, longitude).substring(0,saveSize)
 
       var center = decodeGeoHash(geoHash)
