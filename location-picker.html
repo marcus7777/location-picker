@@ -9,7 +9,7 @@
 <dom-module id="location-picker">
   <template>
     <style>:host {display:block;height:200px} </style>
-    <google-map map="{{map}}" api-key="AIzaSyBICzX2fN6my70KY2YaymzqvfZs_VViaMQ" style="height:200px"  latitude="{{latitude}}" longitude="{{longitude}}">
+    <google-map map="{{map}}" api-key="AIzaSyBICzX2fN6my70KY2YaymzqvfZs_VViaMQ" style="height:200px"  latitude="{{mLatitude}}" longitude="{{mLongitude}}">
       <google-map-marker latitude="[[pLatitude]]" longitude="[[pLongitude]]"></google-map-marker>
     </google-map>
   </template>
@@ -24,11 +24,26 @@
       geoHash:{
         notify:true,
       },
+      _setLatLong: {
+        computed: "setLatLong(latitude, longitude, mLatitude, mLongitude)",
+      },
       mapZoom: {
         observer: "setMapZoom",
       },
       _mapZoom: {
         observer: "_setMapZoom(map.zoom, geoHash.length)",
+      },
+    },
+    setLatLong: function(latitude, longitude, mLatitude, mLongitude) {
+      if (latitude && longitude && (latitude != mLatitude || longitude != mLongitude)) {
+        if (!this.loaded) {
+          this.mLatitude  = this.latitude
+          this.mLongitude = this.longitude
+          this.loaded = true
+        } else {
+          this.latitude  = this.mLatitude
+          this.longitude = this.mLongitude
+        }
       }
     },
     _setMapZoom: function(zoom, hashlength){
@@ -65,6 +80,16 @@
       if (this.geoHash != geoHash) {
         this.geoHash = geoHash
       }
+    },
+    ready: function(){
+      var that = this
+      setTimeout(function(){
+        if (!that.latitude && !that.longitude) {
+          that.latitude  = that.mLatitude
+          that.longitude = that.mLongitude
+        }
+      }, 5000);
+      
     },
   })
 </script>
