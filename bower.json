@@ -9,7 +9,8 @@
   ],
   "dependencies": {
     "polymer": "^1.9.1",
-    "google-map": "GoogleWebComponents/google-map#~1.2.0"
+    "google-map": "GoogleWebComponents/google-map#~1.2.0",
+    "geohash-js": "marcus7777/geohash-js"
   },
   "devDependencies": {
     "iron-test-helpers": "*",
