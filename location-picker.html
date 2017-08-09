@@ -18,12 +18,6 @@
   Polymer({
     is: "location-picker",
     properties:{
-      latitude:{
-        notify:true,
-      },
-      longitude:{
-        notify:true,
-      },
       mapZoom:{
         computed: "getZoom(map.zoom,latitude,longitude)",
         notify:true,
