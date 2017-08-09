@@ -1,5 +1,6 @@
 <link rel="import" href="../google-map/google-map.html">
 <link rel="import" href="../google-map/google-map-marker.html">
+<link rel="import" href="../geohash-js/geohash-js.html">
 <link rel="import" href="../polymer/polymer.html">
 <!--
   `<location-picker  latitude="{{latitude}}" longitude="{{longitude}}"></location-picker>` Pick a location from a map
@@ -9,7 +10,7 @@
   <template>
     <style>:host {display:block;height:200px} </style>
     <google-map map="{{map}}" api-key="AIzaSyBICzX2fN6my70KY2YaymzqvfZs_VViaMQ" style="height:200px"  latitude="{{latitude}}" longitude="{{longitude}}">
-      <google-map-marker latitude="[[latitude]]" longitude="[[longitude]]"></google-map-marker>
+      <google-map-marker latitude="[[pLatitude]]" longitude="[[pLongitude]]"></google-map-marker>
     </google-map>
   </template>
 </dom-module>
@@ -27,12 +28,59 @@
         computed: "getZoom(map.zoom,latitude,longitude)",
         notify:true,
       },
+      _geoHash:{
+        computed: "getGeoHash(mapZoom,latitude,longitude)",
+        notify:true,
+      },
+      geoHash:{
+        notify:true,
+      },
     },
     getZoom: function(zoom) {
       if (zoom) {
         return zoom
       } else {
         return 0
+      }
+    },
+    getGeoHash: function(mapZoom,latitude,longitude) {
+      var saveSize = 9
+      if (mapZoom < 16) {
+        saveSize = 8
+      }
+      if (mapZoom < 15) {
+        saveSize = 7
+      }
+      if (mapZoom < 13) {
+        saveSize = 6
+      }
+      if (mapZoom < 11) {
+        saveSize = 5
+      }
+      if (mapZoom < 7) {
+        saveSize = 4
+      }
+      if (mapZoom < 4) {
+        saveSize = 3
+      }
+      if (mapZoom < 3) {
+        saveSize = 2
+      }
+      var geoHash = encodeGeoHash(latitude, longitude).substring(0,saveSize)
+      var between = function(num, a, b) {
+        return num > Math.min(a, b) && num < Math.max(a, b)
+      }
+      var center = decodeGeoHash(geoHash)
+      var LatM = center.latitude[2]
+      var LngM = center.longitude[2]
+      if (!between(this.latitude,center.latitude[0],center.latitude[1])) {
+        this.pLatitude = LatM
+      }
+      if (!between(this.longitude,center.longitude[0],center.longitude[1])) {
+        this.pLongitude = LngM
+      }
+      if (this.geoHash != geoHash) {
+        this.geoHash = geoHash
       }
     },
   })
