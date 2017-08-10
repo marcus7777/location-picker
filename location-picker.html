@@ -34,16 +34,10 @@
         observer: "_setMapZoom(map.zoom, geoHash.length)",
       },
     },
-    setLatLong: function(latitude, longitude, mLatitude, mLongitude) {
-      if (latitude && longitude && (latitude != mLatitude || longitude != mLongitude)) {
-        if (!this.loaded) {
-          this.mLatitude  = this.latitude
-          this.mLongitude = this.longitude
-          this.loaded = true
-        } else {
-          this.latitude  = this.mLatitude
-          this.longitude = this.mLongitude
-        }
+    setLatLong: function(latitude, longitude) {
+      if (latitude && longitude && (latitude != this.mLatitude || longitude != this.mLongitude)) {
+        this.mLatitude  = latitude
+        this.mLongitude = longitude
       }
     },
     _setMapZoom: function(zoom, hashlength){
