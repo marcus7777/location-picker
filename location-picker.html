@@ -82,12 +82,17 @@
     ready: function(){
       var that = this
       setTimeout(function(){
-        if (!that.latitude && !that.longitude) {
-          that.latitude  = that.mLatitude
-          that.longitude = that.mLongitude
+        if (that.latitude && that.longitude) {
+          that.mLatitude = that.latitude
+          that.mLongitude = that.longitude
         }
-      }, 5000);
-      
+      }, 1000)
+      setTimeout(function(){
+        if (that.latitude && that.longitude) {
+          that.mLatitude = that.latitude
+          that.mLongitude = that.longitude
+        }
+      }, 2000)
     },
   })
 </script>
