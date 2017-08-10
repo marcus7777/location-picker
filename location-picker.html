@@ -35,9 +35,13 @@
       },
     },
     setLatLong: function(latitude, longitude) {
-      if (latitude && longitude && (latitude != this.mLatitude || longitude != this.mLongitude)) {
-        this.mLatitude  = latitude
-        this.mLongitude = longitude
+      if (latitude && longitude) {
+        if (latitude != this.mLatitude) {
+          this.mLatitude  = latitude
+        }
+        if (longitude != this.mlongitude) {
+          this.mLongitude = longitude
+        }
       }
     },
     _setMapZoom: function(zoom, hashlength){
